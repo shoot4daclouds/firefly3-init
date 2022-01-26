@@ -1,9 +1,15 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "centos/7"
+    vagrant_root = File.dirname(__FILE__)
+    ENV['ANSIBLE_ROLES_PATH'] = "#{vagrant_root}/ansbile/roles"
+    config.vm.box = "../packer/centos7-ansible-virtualbox.box"
+    config.vm.hostname = "firefly3-test"
     config.vm.network "private_network", :type => 'dhcp', :adapter => 2
     config.vm.provider "virtualbox" do |v|
         v.memory = 2048
         v.cpus = 2
         v.name = "firefly3-test"
       end
+    config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "ansible/firefly3.yml"
   end
+end
