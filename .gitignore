@@ -1,1 +1,11 @@
+# Packer cache objects
+packer/packer_cache/
+
+# Packer crash log
+packer/crash.log
+
+# For built boxes
+packer/*.box
+
+# Vagrant state
 vagrant/.vagrant/
